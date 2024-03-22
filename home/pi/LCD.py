@@ -34,17 +34,17 @@ try:
     #image1 = Image.new("RGB", (disp.height, disp.width ), "WHITE")
     #draw = ImageDraw.Draw(image1)
 
+    # the file is run with "python LCD.py filename.jpg" and this will load filename.jpg
     # based on https://realpython.com/python-command-line-arguments/#displaying-arguments
-    
     print("Showing image " + sys.argv[1])
+    #this is what it used to do
     #image = Image.open('../pic/LCD_2inch.jpg')
     image = Image.open(sys.argv[1])
 #    image = image.rotate(180)
     disp.ShowImage(image)
-    #draw = ImageDraw.Draw(image)
-    #time.sleep(5)
     disp.module_exit()
 #    logging.info("quit:")
 except IOError as e:
     print(e)
+#the image only shows after the program finishes for some reason, so this sleep makes the image show for 5 seconds before the screen goes blank
 time.sleep(5)
