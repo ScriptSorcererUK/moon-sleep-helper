@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# from https://github.com/pimoroni/bme680-python?tab=readme-ov-file
+
 import subprocess
 import time
 import RPi.GPIO as GPIO
@@ -16,8 +18,12 @@ Press Ctrl+C to exit!
 
 """)
 
+# Show a happy face so we know the program has started
+# from https://docs.python.org/3.5/library/subprocess.html#subprocess.run
 subprocess.run(['python LCD.py face.jpg'], shell=True)
 
+# Tell the Pi to listen for button presses on these pins
+# from http://razzpisampler.oreilly.com/ch07.html
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(16, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -76,19 +82,27 @@ try:
         gas_baseline,
         hum_baseline))
 
+    # Show a happy face so we know the initial testing has finished
     subprocess.run(['python LCD.py face.jpg'], shell=True)
 
+    # repeat forever listening for button presses
     while True:
+        #see if the left button was pressed
         left = GPIO.input(16)
         if left == False:
             print("Left pressed")
+            # plays the sound file through the speaker (waits until it has finished)
+            # sound file from https://www.partnersinrhyme.com/soundfx/watersounds.shtml
             subprocess.run(['aplay beach3.wav'], shell=True)
             time.sleep(1)
             print("Done")
+            #then go back to listening for button presses again
 
+        #see if the right button was pressed
         right = GPIO.input(20)
         if right == False:
             print("Right pressed")
+            #collect data from the sensor
             if sensor.get_sensor_data() and sensor.data.heat_stable:
                 gas = sensor.data.gas_resistance
                 gas_offset = gas_baseline - gas
@@ -124,10 +138,16 @@ try:
                     air_quality_score))
 
                 time.sleep(1)
+                #simple comparison if the air quality is bad or not
+                #simple as this is just a prototype. The future version would collect data from the last 10-12 hours and store it all
                 if air_quality_score > 90:
+                    #show the thumbs up image if the air is good
                     subprocess.run(['python LCD.py goodair.jpg'], shell=True)
                 else:
+                    #show the thumbs down image if the air is bad
                     subprocess.run(['python LCD.py badair.jpg'], shell=True)
                 print("Done")
+
+                #then go back to listening for button presses again
 except:
     pass
