@@ -1,0 +1,14 @@
+[unit]
+Description=Cloud and Moon Python
+After=multi-user.target
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/
+ExecStart=python3 -u indoor-air-quality.py
+KillSignal=SIGINT
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+
