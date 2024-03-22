@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 #import chardet
+
+# from https://www.waveshare.com/wiki/2inch_LCD_Module?Amazon
+
 import os
 import sys
 import time
@@ -19,8 +22,6 @@ device = 0
 #logging.basicConfig(level=logging.DEBUG)
 try:
     # display with hardware SPI:
-    ''' Warning!!!Don't  creation of multiple displayer objects!!! '''
-    #disp = LCD_2inch.LCD_2inch(spi=SPI.SpiDev(bus, device),spi_freq=10000000,rst=RST,dc=DC,bl=BL)
     disp = LCD_2inch.LCD_2inch()
     # Initialize library.
     disp.Init()
@@ -32,6 +33,9 @@ try:
     # Create blank image for drawing.
     #image1 = Image.new("RGB", (disp.height, disp.width ), "WHITE")
     #draw = ImageDraw.Draw(image1)
+
+    # based on https://realpython.com/python-command-line-arguments/#displaying-arguments
+    
     print("Showing image " + sys.argv[1])
     #image = Image.open('../pic/LCD_2inch.jpg')
     image = Image.open(sys.argv[1])
