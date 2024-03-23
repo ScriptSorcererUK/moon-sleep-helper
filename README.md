@@ -10,4 +10,6 @@ A lot of useful help was gathered from lots of websites listed here https://gith
 
 You can see a list of the hardware we used here https://github.com/SANGERA2/moon-sleep-helper/blob/main/Hardware.docx
 
-Here is a copy of our report with photos that's more than 500 words. https://github.com/SANGERA2/moon-sleep-helper/blob/main/Slayilicious%202%20Report.docx
+Here is a copy of our detailed build guide with photos. https://github.com/SANGERA2/moon-sleep-helper/blob/main/Slayilicious%202%20Report.docx
+
+the 3D model along with photos is here https://www.thingiverse.com/thing:6543359
